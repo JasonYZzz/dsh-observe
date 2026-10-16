@@ -1,0 +1,27 @@
+{
+  "package": "dsh-observe",
+  "version": "0.1.0",
+  "verifiedAt": "2026-10-16T04:12:24.697Z",
+  "candidate": "dist/dsh-observe-0.1.0.tgz",
+  "sha256": "259c628e842f34a5bb124de0c73635d9eed5f06471c1c69850fdc74e78df9dd2",
+  "bytes": 36887,
+  "packageFiles": 32,
+  "sourceState": "uncommitted working tree; not published",
+  "repository": "https://github.com/JasonYZzz/dsh-observe",
+  "runtime": {
+    "node": "24.19.0",
+    "dsh": "0.2.0-rc.2",
+    "cordis": "4.0.4"
+  },
+  "packageLockSha256": "199db7de818facdf0b43a0d8d2ae6045d95d3153e0b935d405a702e374cf14ed",
+  "sourceManifestSha256": "65c6fd69afa5bba89810de6bea9a59313607aba2c0b3dc44d7f0c415325510d6",
+  "automatedTests": {
+    "total": 50,
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browserSmoke": "web-smoke.json",
+  "performance": "benchmark.json",
+  "realModelCalls": "deferred by user; fixtures are synthetic"
+}

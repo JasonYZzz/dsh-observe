@@ -1,0 +1,15 @@
+{
+  "measuredAt": "2026-10-16T07:00:38.554879+00:00",
+  "versionBefore": "0.2.1",
+  "readOnly": true,
+  "logs": 122,
+  "withSession": 0,
+  "withRun": 0,
+  "withNode": 0,
+  "byLevel": {
+    "error": 5,
+    "info": 8,
+    "warn": 109
+  },
+  "conclusion": "Session-scoped diagnostics empty because all captured operational logs lack explicit session association. Search targets redacted diagnostic summaries, not session message content."
+}

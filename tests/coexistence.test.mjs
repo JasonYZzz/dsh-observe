@@ -1,0 +1,34 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { Context } from '@deepseek-ai/cordis';
+import { Session, SessionId, SessionSeq } from '@deepseek-ai/dsh-session';
+import { SessionTelemetryCoordinator } from '@deepseek-ai/dsh-session-telemetry';
+import { Store } from '../lib/store.js';
+import { Capture } from '../lib/capture.js';
+import { fixtures } from './fixtures/rc2.mjs';
+
+test('observation indexing never consumes the official feedback handoff cursor or changes its payload', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'observe-telemetry-'));
+  const store = new Store(directory); await store.ready;
+  const ctx = new Context(); let capture; let coordinator; const exported = [];
+  const session = Session.create(SessionId('coexistence'), fixtures.success);
+  const baselineSession = Session.create(SessionId('coexistence'), fixtures.success);
+  ctx.provide('sessions', { list: () => [] });
+  ctx.provide('sessionQuery', { async observeSession() { return { header: session.header, inheritedEventCount: 0, events: fixtures.success, [Symbol.dispose]() {} }; } });
+  const baseline = [];
+  const baseFiber = await ctx.plugin({ apply(ctx) { new SessionTelemetryCoordinator(ctx, { emit: (row) => baseline.push(row), shutdown() {} }, { capture: 'on-demand', includeHistory: true }).captureSession(baselineSession, SessionSeq(6)); } });
+  const official = await ctx.plugin({ apply(ctx) { coordinator = new SessionTelemetryCoordinator(ctx, { emit: (row) => exported.push(row), shutdown() {} }, { capture: 'on-demand', includeHistory: true }); } });
+  const observation = await ctx.plugin({ inject: ['sessions', 'sessionQuery'], apply(ctx) { capture = new Capture(ctx, store); ctx.effect(() => () => capture.dispose()); } });
+  t.after(async () => { await observation.dispose(); await official.dispose(); await baseFiber.dispose(); await store.close(); await rm(directory, { recursive: true, force: true }); });
+  coordinator.captureSession(session, SessionSeq(2));
+  await capture.ensure(session.id);
+  coordinator.captureSession(session, SessionSeq(6));
+  await observation.dispose();
+  coordinator.captureSession(session, SessionSeq(6));
+  assert.deepEqual(exported, baseline);
+  assert.equal(exported.length, fixtures.success.length);
+  assert.equal(ctx.sessionTelemetry, undefined);
+});

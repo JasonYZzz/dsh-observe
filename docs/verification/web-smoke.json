@@ -1,0 +1,24 @@
+{
+  "measuredAt": "2026-10-16T07:03:49.818Z",
+  "version": "0.2.2",
+  "tarballSha256": "9696dd699bfd65df10286562e6afa2a08298823e44b87fa6b8102f926b7aa4e5",
+  "nativePreparation": {
+    "events": 16674,
+    "prepareMs": 62.769415999999865,
+    "rssBefore": 518422528,
+    "rssAfter": 536756224,
+    "format": "native JSONL/Zstandard, synthetic tool bodies; single preparation, RSS is not peak memory"
+  },
+  "indexedLargeMs": 357.6208750000005,
+  "phases": [
+    "native request input/output; historical system context; effective tool schema; tool arguments/results; content pagination; credential redaction; light/dark/mobile; refreshable node link; source files unchanged",
+    "Chinese message badges; source-aware user/context separation; protocol source disclosure; semantic filters and counts; desktop/dark/390px labels",
+    "Chinese turn/step labels; captured-vs-unmatched empty states; session/all/unassociated scopes; keyword substring/ASCII case; exact source; clear filters; desktop/mobile log guidance",
+    "10002-node history; 50 rows per page; pagination uniqueness; keyboard selection; hidden polling suspension",
+    "new content APIs preserve native authentication and Host/Origin fences; no browser identity mutation",
+    "SIGKILL/restart; stable IDs; thirteen native cold fixtures",
+    "uninstall preserves database; native Web available"
+  ],
+  "modelCalls": 0,
+  "fixtureSource": "synthetic native events; no Agent created by fixture plugin"
+}

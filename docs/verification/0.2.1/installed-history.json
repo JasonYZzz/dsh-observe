@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-16T06:20:42.057Z",
+  "pluginVersion": "0.2.1",
+  "nativeSessionSearch": true,
+  "realHistoryReadOnly": true,
+  "contextStatus": "reconstructed",
+  "contextMessages": 5,
+  "semanticCategoryCounts": {
+    "system": 1,
+    "context": 3,
+    "user": 1
+  },
+  "humanInputs": 1,
+  "injectedMessages": 3,
+  "chineseApprovalBadge": true,
+  "effectiveTools": 37,
+  "modelOutput": true,
+  "toolArgumentsAndResult": true,
+  "capture": {
+    "queued": 0,
+    "droppedLogs": 0,
+    "gaps": 0,
+    "failedSessions": 0
+  },
+  "startedNewModelCalls": false
+}

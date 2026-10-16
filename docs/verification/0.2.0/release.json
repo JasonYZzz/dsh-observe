@@ -1,0 +1,27 @@
+{
+  "package": "dsh-observe",
+  "version": "0.2.0",
+  "verifiedAt": "2026-10-16T06:04:08.574Z",
+  "candidate": "dist/dsh-observe-0.2.0.tgz",
+  "sha256": "635c8bda0f1bd8e6f2409ba575eb722f11670e82d9b5a797461417e567b4c005",
+  "bytes": 46629,
+  "packageFiles": 35,
+  "sourceState": "uncommitted working tree; not published",
+  "repository": "https://github.com/JasonYZzz/dsh-observe",
+  "runtime": {
+    "node": "24.19.0",
+    "dsh": "0.2.0-rc.2",
+    "cordis": "4.0.4"
+  },
+  "packageLockSha256": "33c03aba794fdee9104ec002ce25894e8f8c4c704c7ee1c259075b1c56709b0a",
+  "automatedTests": {
+    "total": 62,
+    "passed": 62,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browserSmoke": "web-smoke.json",
+  "installedHistory": "installed-history.json",
+  "nativeHistoryModelCalls": "read only existing history; no new model calls",
+  "installedArtifactMatches": true
+}

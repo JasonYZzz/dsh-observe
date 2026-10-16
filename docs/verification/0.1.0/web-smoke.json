@@ -1,0 +1,23 @@
+{
+  "measuredAt": "2026-10-16T04:12:24.697Z",
+  "tarballSha256": "259c628e842f34a5bb124de0c73635d9eed5f06471c1c69850fdc74e78df9dd2",
+  "nativePreparation": {
+    "events": 16674,
+    "prepareMs": 57.16500000000019,
+    "rssBefore": 425263104,
+    "rssAfter": 444907520,
+    "format": "native JSONL/Zstandard, synthetic tool bodies; single preparation, RSS is not peak memory"
+  },
+  "indexedLargeMs": 347.38166699999965,
+  "phases": [
+    "delayed filter response cannot overwrite current selection; hidden polling stops and resumes on visibility",
+    "fresh tarball; native fixtures; tool/source inspection; metadata policy; light/dark/mobile; refreshable node link; source hashes unchanged; 401/403/oversized-body rejection; no browser identity mutation route",
+    "native conversation Observe tab",
+    "10002-node history rendered 50 rows per page; next-page uniqueness; keyboard node selection; standalone compaction source",
+    "Host SIGKILL/restart and stale-lock recovery; all eleven native cold reads; stable namespace and usage",
+    "uninstall; native Web starts; observation database preserved"
+  ],
+  "modelCalls": 0,
+  "oversizedRejection": "native-connection-close",
+  "fixtureSource": "synthetic native Session events; no Agent created by the fixture plugin"
+}

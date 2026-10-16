@@ -1,0 +1,18 @@
+{
+  "verifiedAt": "2026-10-16T06:04:47.759Z",
+  "pluginVersion": "0.2.0",
+  "nativeSessionSearch": true,
+  "realHistoryReadOnly": true,
+  "contextStatus": "reconstructed",
+  "contextMessages": 5,
+  "effectiveTools": 37,
+  "modelOutput": true,
+  "toolArgumentsAndResult": true,
+  "capture": {
+    "queued": 0,
+    "droppedLogs": 0,
+    "gaps": 0,
+    "failedSessions": 0
+  },
+  "startedNewModelCalls": false
+}

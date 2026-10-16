@@ -1,0 +1,31 @@
+{
+  "measuredAt": "2026-10-16T04:04:54.622Z",
+  "node": "24.19.0",
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "dataset": {
+    "nodes": 10002,
+    "logs": 100000,
+    "events": 16672,
+    "source": "synthetic metadata, not a real model or native cold decode"
+  },
+  "ingestMs": 754.3,
+  "logsMs": 515.7,
+  "summaryP95Ms": 0.0007,
+  "nodesPageP95Ms": 0.169,
+  "logsPageP95Ms": 0.108,
+  "fullTextMissP95Ms": 36.303,
+  "rssBefore": 75038720,
+  "rssAfter": 138182656,
+  "database": {
+    "status": "ready",
+    "schemaVersion": 2,
+    "namespace": "71af0e17-4434-4a18-b45d-9c046f0e26f8",
+    "revision": 16772,
+    "bytes": 33935360,
+    "walBytes": 4684472
+  }
+}
