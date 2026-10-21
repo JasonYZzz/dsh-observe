@@ -3,14 +3,14 @@
 为 DeepSeek Harness Web 提供本地执行链路与关联日志的独立开源插件。
 [JasonYZzz/dsh-observe](https://github.com/JasonYZzz/dsh-observe)，MIT 许可。
 
-`0.2.2` 候选版已实现采集、SQLite 查询和两个原生 Web 入口。已完成合成事件、真实宿主和浏览器验收；**真实模型、实际工具和子 Agent 调用按用户要求留待配置后验收**。详见[验收记录](docs/verification/README.md)。
+`0.2.1-rc.2` 与本机 DSH 版本对齐，保留此前功能，并修复索引重试与恢复状态。已实现采集、SQLite 查询和两个原生 Web 入口。已完成合成事件、真实宿主和浏览器验收；**真实模型、实际工具和子 Agent 调用按用户要求留待配置后验收**。详见[验收记录](docs/verification/README.md)。
 
 ## 兼容基线
 
 | 组件 | 固定验证版本 |
 |---|---|
-| DSH Web | `@deepseek-ai/dsh@0.2.0-rc.2` |
-| Cordis | `4.0.4` |
+| DSH Web | `@deepseek-ai/dsh@0.2.1-rc.2` |
+| Cordis | `4.0.5` |
 | Node.js | `24.19.0`（仅支持 Node 24） |
 
 未声明支持其他 RC 或正式版。使用宿主 React、UI primitives、locale、认证和主题；无需独立前端、数据库服务或模型配置即可查看已有日志。
@@ -20,9 +20,11 @@
 在已安装固定版本 DSH 的机器上，用本地候选包安装到 Web profile：
 
 ```sh
-dsh plugin --profile web add /absolute/path/dsh-observe-0.2.2.tgz
+dsh plugin --profile web add /absolute/path/dsh-observe-0.2.1-rc.2.tgz
 dsh web
 ```
+
+本次版本号按宿主基线重新对齐；从原插件 `0.2.2` 或本地 `0.2.3` 切换时，请显式安装上述 tarball。数据库保持 schema 2，功能不回退。
 
 重启宿主后，打开侧栏“观测”，或当前原生会话中的“观测”Tab。0.2.2 将轮次、步骤和运维日志筛选统一中文显示，并明确日志采集与搜索范围。0.2.1 使用中文消息类型标签，并按原生来源区分用户输入与注入上下文。0.2.0 按 Context Insights 与原生 Trajectory 的查看任务重新组织界面：
 
@@ -38,7 +40,7 @@ dsh web
 推荐先用隔离目录验证，不要将自动化测试指向日常数据：
 
 ```sh
-DSH_HOME=/absolute/path/isolated-home dsh plugin --profile web add /absolute/path/dsh-observe-0.2.2.tgz
+DSH_HOME=/absolute/path/isolated-home dsh plugin --profile web add /absolute/path/dsh-observe-0.2.1-rc.2.tgz
 DSH_HOME=/absolute/path/isolated-home dsh web
 ```
 

@@ -42,5 +42,5 @@ export async function apply(ctx: Context) {
   ctx.provide('dshObserve', service);
   const handle = createHandler({ health: service.health, store, capture, sessionQuery: ctx.sessionQuery });
   for (const endpoint of endpoints) ctx.effect(() => ctx.connection.fetch.register({ path: `/api/${PREFIX}${endpoint}`, methods: ['POST'], requestBody: 'streaming',
-    fetch: createFetchHandler(endpoint, handle, ctx.connection.operator) }), `dsh-observe: ${endpoint}`);
+    fetch: createFetchHandler(endpoint, handle, ctx.connection.browserPeer) }), `dsh-observe: ${endpoint}`);
 }

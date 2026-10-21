@@ -1,15 +1,15 @@
 {
-  "measuredAt": "2026-10-16T07:03:49.818Z",
-  "version": "0.2.2",
-  "tarballSha256": "9696dd699bfd65df10286562e6afa2a08298823e44b87fa6b8102f926b7aa4e5",
+  "measuredAt": "2026-10-21T05:43:48.276Z",
+  "version": "0.2.1-rc.2",
+  "tarballSha256": "8963fde2babba20984b5668f5bb0d2b8ed163fd41062f6c5b5741148d37ebb3d",
   "nativePreparation": {
     "events": 16674,
-    "prepareMs": 62.769415999999865,
-    "rssBefore": 518422528,
-    "rssAfter": 536756224,
+    "prepareMs": 60.44575000000032,
+    "rssBefore": 568967168,
+    "rssAfter": 601817088,
     "format": "native JSONL/Zstandard, synthetic tool bodies; single preparation, RSS is not peak memory"
   },
-  "indexedLargeMs": 357.6208750000005,
+  "indexedLargeMs": 384.50774999999885,
   "phases": [
     "native request input/output; historical system context; effective tool schema; tool arguments/results; content pagination; credential redaction; light/dark/mobile; refreshable node link; source files unchanged",
     "Chinese message badges; source-aware user/context separation; protocol source disclosure; semantic filters and counts; desktop/dark/390px labels",

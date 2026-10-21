@@ -1,28 +1,29 @@
 {
   "package": "dsh-observe",
-  "version": "0.2.2",
-  "verifiedAt": "2026-10-16T07:06:12.373815+00:00",
-  "candidate": "dist/dsh-observe-0.2.2.tgz",
-  "sha256": "9696dd699bfd65df10286562e6afa2a08298823e44b87fa6b8102f926b7aa4e5",
-  "bytes": 51943,
+  "version": "0.2.1-rc.2",
+  "verifiedAt": "2026-10-21T05:44:23.303119+00:00",
+  "candidate": "dist/dsh-observe-0.2.1-rc.2.tgz",
+  "sha256": "8963fde2babba20984b5668f5bb0d2b8ed163fd41062f6c5b5741148d37ebb3d",
+  "bytes": 52083,
   "packageFiles": 35,
-  "sourceState": "uncommitted working tree; not published",
+  "sourceState": "validated release candidate; not published to npm",
   "repository": "https://github.com/JasonYZzz/dsh-observe",
   "runtime": {
     "node": "24.19.0",
-    "dsh": "0.2.0-rc.2",
-    "cordis": "4.0.4"
+    "dsh": "0.2.1-rc.2",
+    "cordis": "4.0.5"
   },
-  "packageLockSha256": "723b9d38855de6ac05d270f0a1b5375a6a6b0c45e7f822bd6c0da1d79c154d5d",
+  "packageLockSha256": "f3d9e81cfe949f6bda101b32fd72b6917b737d50d87113a0bbe982928bc4ec49",
   "automatedTests": {
-    "total": 70,
-    "passed": 70,
+    "total": 74,
+    "passed": 74,
     "failed": 0,
     "skipped": 0
   },
   "browserSmoke": "web-smoke.json",
-  "installedHistory": "installed-history.json",
-  "nativeHistoryModelCalls": "read only existing history; no new model calls",
-  "installedArtifactMatches": true,
-  "logSearchAnalysis": "log-search-analysis.json"
+  "benchmark": "benchmark.json",
+  "modelCalls": 0,
+  "installedInDailyProfile": false,
+  "browserTestedArtifactMatches": true,
+  "previousVerification": "0.2.2/README.md"
 }

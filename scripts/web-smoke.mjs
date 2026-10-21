@@ -45,7 +45,8 @@ async function startHost(fixtures = true) {
   throw new Error('Host startup timed out');
 }
 async function dismissOnboarding() {
-  for (const name of ['继续', '稍后配置']) await page.getByRole('button', { name, exact: true }).click({ timeout: 1500 }).catch((error) => { if (error.name !== 'TimeoutError') throw error; });
+  await page.getByRole('button', { name: '观测', exact: true }).waitFor();
+  for (const name of ['继续', '关闭']) await page.getByRole('button', { name, exact: true }).click({ timeout: 1500 }).catch((error) => { if (error.name !== 'TimeoutError') throw error; });
 }
 async function rpc(context, base, endpoint, payload = {}) {
   const response = await context.request.post(`${base}/api/dsh-observe/${endpoint}`, { data: { type: 'client-request', rpcId: randomUUID(), method: `dsh-observe/${endpoint}`, payload } });

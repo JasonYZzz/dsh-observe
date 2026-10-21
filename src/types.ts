@@ -1,5 +1,5 @@
-export const VERSION = '0.2.2';
-export const HOST_VERSION = '0.2.0-rc.2';
+export const VERSION = '0.2.1-rc.2';
+export const HOST_VERSION = '0.2.1-rc.2';
 export const PREFIX = 'dsh-observe/';
 export type Status = 'running' | 'completed' | 'error' | 'cancelled' | 'truncated' | 'blocked' | 'unknown';
 export interface Usage { inputTokens: number; outputTokens: number; totalTokens?: number; cacheReadTokens?: number; cacheWriteTokens?: number; reasoningTokens?: number }
