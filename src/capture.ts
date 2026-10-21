@@ -69,7 +69,11 @@ export class Capture {
   }
   private push(job: Job) {
     if (this.stopped) return;
-    if (this.queue.length >= 2048) { if (job.kind === 'log') this.droppedLogs++; else { this.gaps++; this.failures.add(job.kind === 'event' ? job.info.id : job.id); } return; }
+    if (this.queue.length >= 2048) {
+      if (job.kind === 'log') this.droppedLogs++;
+      else { const id = job.kind === 'event' ? job.info.id : job.id; this.gaps++; this.failures.add(id); this.indexing.delete(id); }
+      return;
+    }
     this.queue.push(job);
     if (!this.draining) {
       this.draining = new Promise<void>((resolve) => setImmediate(resolve)).then(() => this.drain()).finally(() => { this.draining = undefined; });
@@ -104,8 +108,9 @@ export class Capture {
           this.gaps++;
           const id = job.kind === 'event' ? job.info.id : job.id;
           this.failures.add(id);
+          this.indexing.delete(id);
           if (job.kind === 'event') {
-            if (!this.queue.some((item) => item.kind === 'index' && item.id === id)) { this.indexing.delete(id); this.schedule(id); }
+            if (!this.queue.some((item) => item.kind === 'index' && item.id === id)) this.schedule(id);
           }
         }
       }
@@ -124,7 +129,7 @@ export class Capture {
         try {
           info = { ...info, version: observation.header.version, inheritedEventCount: observation.inheritedEventCount, parentSession: observation.header.parentSession };
           if (observation.events.length > 100_000) throw new Error('Session exceeds 100000 event limit; source remains unchanged');
-          const stored = await this.store.call<{ indexedThroughSeq: number } | null>('session.get', { sessionId: id });
+          const stored = await this.store.call<{ indexedThroughSeq: number; error: string | null } | null>('session.get', { sessionId: id });
           let start = (stored?.indexedThroughSeq ?? -1) + 1;
           for (; start < observation.events.length; start += 128) {
             control.throwIfAborted();
@@ -132,7 +137,7 @@ export class Capture {
             await this.store.call('batch', { info, events });
             await new Promise<void>((resolve) => setImmediate(resolve));
           }
-          if (!observation.events.length) await this.store.call('batch', { info, events: [] });
+          if (!observation.events.length || stored?.error) await this.store.call('batch', { info, events: [] });
           this.failures.delete(id);
         } finally { observation[Symbol.dispose](); }
       } catch (error) {

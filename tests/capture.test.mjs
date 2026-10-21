@@ -105,6 +105,44 @@ test('cancelling an in-flight native read clears the pending slot without poison
   assert.equal((await store.health()).status, 'ready');
 });
 
+for (const failure of ['queue overflow', 'transient read failure', 'unchanged history']) {
+  test(`cold indexing recovers after ${failure}`, async (t) => {
+    const directory = await mkdtemp(join(tmpdir(), 'observe-retry-'));
+    const store = new Store(directory); await store.ready;
+    const ctx = new Context(); let capture; let reads = 0; let failRead = false;
+    const session = { id: 'session-a', header: { id: 'session-a', version: 4 }, inheritedEventCount: 0 };
+    ctx.provide('sessions', { list: () => [] });
+    ctx.provide('sessionQuery', { async observeSession() {
+      reads++;
+      if (failRead) throw new Error('Temporary read failure');
+      return { header: session.header, inheritedEventCount: 0, events: fixtures.success, [Symbol.dispose]() {} };
+    } });
+    const fiber = await ctx.plugin({ inject: ['sessions', 'sessionQuery'], apply(ctx) { capture = new Capture(ctx, store); ctx.effect(() => () => capture.dispose()); } });
+    t.after(async () => { await fiber.dispose(); await store.close(); await rm(directory, { recursive: true, force: true }); });
+    if (failure === 'queue overflow') {
+      for (let i = 0; i < 2048; i++) ctx.logger('fixture').info('Queue filler');
+      ctx.emit('session/created', session);
+      await capture.settle();
+      assert.equal(reads, 0);
+    } else {
+      if (failure === 'unchanged history') await capture.ensure(session.id);
+      failRead = true;
+      ctx.emit('session/created', session);
+      await capture.settle();
+      assert.equal(capture.health().failedSessions, 1);
+      failRead = false;
+    }
+    const readsBeforeRetry = reads;
+    if (failure === 'unchanged history') await capture.ensure(session.id);
+    else { ctx.emit('session/event', session, fixtures.success[0]); await capture.settle(); }
+    assert.equal(reads, readsBeforeRetry + 1);
+    assert.equal((await store.call('runs.list', {})).items[0].status, 'completed');
+    assert.equal(capture.health().failedSessions, 0);
+    assert.equal((await store.call('capture.health')).failedSessions, 0);
+    assert.equal((await store.call('session.get', { sessionId: session.id })).error, null);
+  });
+}
+
 test('logger captures error/warn/info and preserves explicit session metadata; payload text never infers scope', async(t)=>{
  const directory=await mkdtemp(join(tmpdir(),'observe-log-scope-'));const store=new Store(directory);await store.ready;
  const ctx=new Context();let capture;ctx.provide('sessions',{list:()=>[]});ctx.provide('sessionQuery',{});
